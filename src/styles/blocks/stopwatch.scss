@@ -1,6 +1,9 @@
 @import '../variables';
 
 .stopwatch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   width: $stopwatch-size;
   height: $stopwatch-size;
@@ -8,61 +11,44 @@
   border-radius: 50%;
 
   &__center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    position: relative;
     width: $stopwatch-center-diameter;
     height: $stopwatch-center-diameter;
     background: $stopwatch-center-color;
     border-radius: 50%;
     z-index: 1;
-    transform: translate(-50%, -50%);
   }
 
   &__hand {
     position: absolute;
-    top: 50%;
+    bottom: 50%;
     left: 50%;
-    transform-origin: 50% 100%;
+    transform-origin: bottom center;
+    transform: translate(-50%, -100%);
+  }
 
-    &--minute::before,
-    &--second::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      transform: translateX(-50%);
-    }
+  &__hand--minute {
+    width: $minutes-hand-width;
+    height: $minutes-hand-length;
+    background: $minutes-hand-color;
+    animation: rotate 3600s steps(60) infinite;
+  }
 
-    &--minute::before {
-      width: $minutes-hand-width;
-      height: $minutes-hand-length;
-      background: $minutes-hand-color;
-    }
-
-    &--second::before {
-      width: $seconds-hand-width;
-      height: $seconds-hand-length;
-      background: $seconds-hand-color;
-    }
-
-    &--minute {
-      animation: rotate 3600s steps(60) infinite;
-    }
-
-    &--second {
-      animation: rotate 60s linear infinite;
-    }
+  &__hand--second {
+    width: $seconds-hand-width;
+    height: $seconds-hand-length;
+    background: $seconds-hand-color;
+    animation: rotate 60s linear infinite;
   }
 }
 
 @keyframes rotate {
   from {
-    transform: rotate(0deg);
+    transform: translate(-50%) rotate(0deg);
   }
 
   to {
-    transform: rotate(360deg);
+    transform: translate(-50%) rotate(360deg);
   }
 }
 
