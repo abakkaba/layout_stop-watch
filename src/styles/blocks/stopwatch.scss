@@ -23,36 +23,35 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform-origin: center center;
+    transform-origin: 50% 100%;
+
+    &--minute::before,
+    &--second::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+    }
+
+    &--minute::before {
+      width: $minutes-hand-width;
+      height: $minutes-hand-length;
+      background: $minutes-hand-color;
+    }
+
+    &--second::before {
+      width: $seconds-hand-width;
+      height: $seconds-hand-length;
+      background: $seconds-hand-color;
+    }
 
     &--minute {
       animation: rotate 3600s steps(60) infinite;
-
-      &::before {
-        content: '';
-        position: absolute;
-        width: $minutes-hand-width;
-        height: $minutes-hand-length;
-        background: $minutes-hand-color;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -100%);
-      }
     }
 
     &--second {
       animation: rotate 60s linear infinite;
-
-      &::before {
-        content: '';
-        position: absolute;
-        width: $seconds-hand-width;
-        height: $seconds-hand-length;
-        background: $seconds-hand-color;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -100%);
-      }
     }
   }
 }
